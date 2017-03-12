@@ -15,10 +15,10 @@ dht DHT;
 #define DHT11_PIN 6
 RTC_DS3231 rtc;
 
-
 void setup()
 
 {
+  
   Serial.begin(9600); 
   pinMode(pinCS, OUTPUT);
 if (SD.begin())
@@ -59,9 +59,6 @@ if (SD.begin())
     Serial.println("error opening test.txt");
   }
   
-  
-
-  lcd.begin(16,2);
   
   {
     //Serial.println("RTC lost power, lets set the time!");
@@ -124,12 +121,30 @@ if (SD.begin())
   Serial.print(mySensor.calibration.dig_H6);
   Serial.print("");
 }
+lcd.begin(16,2);
+  for(int i = 0; i< 3; i++)
+  {
+  
+  lcd.println("DHT11");
+  delay(5000);
+  lcd.clear();
+    int chk = DHT.read11(DHT11_PIN);
+    lcd.setCursor(0,0);
+    lcd.println("Temperature:");
+    lcd.setCursor(0,1);
+    lcd.println(DHT.temperature, 1);
+    delay(2000);
+    lcd.clear();
+    lcd.println("Humidity)
+    
+  }
+
     }
   
 void loop()
-if(n>3);{
 {
-   
+  
+
   DateTime now = rtc.now();
     Serial.print(now.year(), DEC);
     Serial.print('/');
@@ -143,42 +158,30 @@ if(n>3);{
     Serial.print(':');
     Serial.print(now.second(), DEC);
     Serial.print("   ");
-   
     delay(100);
   Serial.print("Temperature: ");
   Serial.print(mySensor.readTempF(), 2);
   Serial.print(" degrees F  ");
-
   Serial.print("Pressure: ");
   Serial.print(mySensor.readFloatPressure(), 2);
   Serial.print(" Pa  ");
-
   Serial.print("Altitude: ");
   Serial.print(mySensor.readFloatAltitudeFeet(), 2);
   Serial.print(" ft  "); 
   delay(100);
-
-      
   int chk = DHT.read11(DHT11_PIN);
-
 Serial.print(DHT.humidity, 1);
-Serial.print("%     ");
+Serial.print("%  ");
 Serial.print(DHT.temperature, 1);
 Serial.println("C ");
-
 delay(10000);
-}
-
-else
-{
-  lcd.setCursor(0,0);
-  lcd.print("RTC");
-  lcd.setCursor(0,1);
-  lcd.print(
-}
-}
 
 
-}
+  }
+
+
+
+
+
 
 
