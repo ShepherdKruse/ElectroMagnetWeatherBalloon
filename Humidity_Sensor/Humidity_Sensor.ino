@@ -1,4 +1,4 @@
-#include<dht.h>
+ #include<dht.h>
 dht DHT;
 
 // if you require to change the pin number, Edit the pin with your arduino pin.
