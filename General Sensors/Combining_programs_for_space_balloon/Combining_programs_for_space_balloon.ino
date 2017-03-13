@@ -20,44 +20,7 @@ void setup()
 {
   
   Serial.begin(9600); 
-  pinMode(pinCS, OUTPUT);
-if (SD.begin())
-  {
-    Serial.println("SD card is ready to use.");
-  } else
-  {
-    Serial.println("SD card initialization failed");
-    return;
-  }
   
-  // Create/Open file 
-  myFile = SD.open("test.txt", FILE_WRITE);
-  
-  // if the file opened okay, write to it:
-  if (myFile) {
-    Serial.println("Writing to file...");
-    // Write to file
-    myFile.println("Testing text 1, 2 ,3...");
-    myFile.close(); // close the file
-    Serial.println("Done.");
-  }
-  // if the file didn't open, print an error:
-  else {
-    Serial.println("error opening test.txt");
-  }
-  // Reading the file
-  myFile = SD.open("test.txt");
-  if (myFile) {
-    Serial.println("Read:");
-    // Reading the whole file
-    while (myFile.available()) {
-      Serial.write(myFile.read());
-   }
-    myFile.close();
-  }
-  else {
-    Serial.println("error opening test.txt");
-  }
   
   
   {
@@ -121,30 +84,70 @@ if (SD.begin())
   Serial.print(mySensor.calibration.dig_H6);
   Serial.print("");
 }
-lcd.begin(16,2);
-  for(int i = 0; i< 3; i++)
-  {
-  
-  lcd.println("DHT11");
-  delay(5000);
-  lcd.clear();
-    int chk = DHT.read11(DHT11_PIN);
-    lcd.setCursor(0,0);
-    lcd.println("Temperature:");
-    lcd.setCursor(0,1);
-    lcd.println(DHT.temperature, 1);
-    delay(2000);
-    lcd.clear();
-    lcd.println("Humidity)
-    
-  }
+//                                    lcd.begin(16,2);
+//                                    for(int i = 0; i< 3; i++)
+//                                        {
+//                                          lcd.clear();
+//                                          lcd.print("Date/Time");
+//                                          delay(5000);
+//                                          lcd.clear();
+//                                          DateTime now = rtc.now();
+//                                          lcd.print("Date  ");
+//                                          lcd.print(now.year(), DEC);
+//                                          lcd.print('/');
+//                                          lcd.print(now.month(), DEC);
+//                                          lcd.print('/');
+//                                          lcd.print(now.day(), DEC);
+//                                          lcd.setCursor(0,1);
+//                                          lcd.print("Time  ");
+//                                          lcd.print(now.hour(), DEC);
+//                                          lcd.print(':');
+//                                          lcd.print(now.minute(), DEC);
+//                                          lcd.print(':');
+//                                          lcd.print(now.second(), DEC);
+//                                          delay(2000);
+//                                      
+//                                          lcd.clear();
+//                                          lcd.print("DHT11");
+//                                          delay(5000);
+//                                          lcd.clear();
+//                                          int chk = DHT.read11(DHT11_PIN);
+//                                          lcd.print("Temp ");
+//                                          lcd.print(DHT.temperature, 1);
+//                                          lcd.print("C");
+//                                          lcd.setCursor(0,1);
+//                                          lcd.print("Humidity ");
+//                                          lcd.print(DHT.humidity, 1);
+//                                          lcd.print("%");
+//                                          delay(2000); 
+//
+//                                          lcd.clear();
+//                                          lcd.print("BMP280");
+//                                          delay(5000);
+//                                          lcd.clear();
+//                                          lcd.print("Temp: ");
+//                                          lcd.print(mySensor.readTempF(), 2);
+//                                          lcd.print(" F");
+//                                          lcd.setCursor(0,1);
+//                                          lcd.print("Pres: ");
+//                                          lcd.print(mySensor.readFloatPressure(), 2);
+//                                          lcd.print("Pa");
+//                                          delay(5000);
+//                                          lcd.clear();
+//                                          lcd.print("Alt: ");
+//                                          lcd.print(mySensor.readFloatAltitudeFeet(), 2);
+//                                          lcd.print(" ft"); 
+//                                          delay(5000);
+//                                          
+//                                        }
+//                                        lcd.noBacklight();
 
     }
   
 void loop()
 {
-  
 
+{
   DateTime now = rtc.now();
     Serial.print(now.year(), DEC);
     Serial.print('/');
@@ -158,6 +161,7 @@ void loop()
     Serial.print(':');
     Serial.print(now.second(), DEC);
     Serial.print("   ");
+}
     delay(100);
   Serial.print("Temperature: ");
   Serial.print(mySensor.readTempF(), 2);
@@ -175,10 +179,13 @@ Serial.print("%  ");
 Serial.print(DHT.temperature, 1);
 Serial.println("C ");
 delay(10000);
+                          //SD Card Code
 
+
+
+         
 
   }
-
 
 
 
